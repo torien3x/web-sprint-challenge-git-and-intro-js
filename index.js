@@ -209,17 +209,19 @@ Practice accessing data above by console.log-ing following items:
 
 //(1) Name of the first artist (0th index) in the array
 
-
+console.log(artists[0]);
 
 //(2) Bio of the third artist (2nd index) in the array 
 
-
+console.log(artists[1]);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2 (not auto tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 (no function needed) 
 There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Fix this issue and console.log() to check your work. */
 
-
+const obj = artists[8]
+obj.name = 'Vincent Van Gogh';
+console.log(artists[8]);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀  
 Use getArtistByIndex to do the following:
@@ -230,9 +232,11 @@ Use getArtistByIndex to do the following:
 
 🌟 EXAMPLE: if getArtistByIndex is invoked with the artists array and the number 0, it will return `the artist at index 0 is Amedeo Modigliani` */
 
-function getArtistByIndex(/*Your Code Here*/) {
-  /*Your Code Here*/
+function getArtistByIndex(arr, num) {
+  return `the artist at index ${arr[num].id} is ${arr[num].name}`
 }
+let artistByIndex = getArtistByIndex(artists, 1);
+console.log(artistByIndex);
 
 
 
@@ -244,8 +248,14 @@ Use listOfNames to do the following:
 🌟 EXAMPLE of return: ["Amedeo Modigliani", "Vasiliy Kandinskiy", "Diego Rivera"....]
 */
 
-function listOfNames(/*Your Code Here*/) {
-  /*Your Code Here*/
+function listOfNames(artistArray) {
+  let newArray = artistArray;
+
+  for (let index = 0; index < newArray.length; index++) {
+    newArray[index] = newArray[index].name;
+  }
+
+  return newArray;
 }
 
 
@@ -259,8 +269,12 @@ Use removeArtist to do the following:
 5. Return the resulting copied array
 🌟 EXAMPLE: if removeArtist is invoked with the artists array and the number 0, it will return the resulting array with Amedeo Modigliani removed from our dataset. */
 
-function removeArtist(/*Your Code Here*/) {
-  /*Your Code Here*/
+function removeArtist(artistArray, num) {
+  let newArray = artistArray;
+
+  newArray.splice(num, 1)
+
+  return newArray
 }
 
 
@@ -281,9 +295,22 @@ Use addArtist to do the following:
 5. Add the newly created object to the copied array, then return the copied array
 🌟 EXAMPLE: Invoking addArtist(artists, 'John Doe', '1988-2022', 'Full Stack Development', 'African American', 'I have a background in customer service at Big Retail Chain. I am attending BloomTech to become a Frontend Developer.') should return the artists array with the above object added to the end of the array. */
 
-function addArtist(/*Your Code Here*/) {
-  /*Your Code Here*/
+function addArtist(artistArray, name, years, genre, nationality, bio) {
+  let newArray = artistArray
+  let artistList = {
+    name: name,
+    years: years,
+    genre: genre,
+    nationality: nationality,
+    bio: bio,
+  }
+
+  newArray = [...newArray, artistList]
+
+  return newArray
 }
+
+
 
 
 
@@ -295,8 +322,16 @@ Use lotsOfArt to do the following:
 🌟 EXAMPLE: lotsOfArt(artists) will return ["Amedeo Modigliani", "Rene Magritte", ... "Albrecht Dürer"]
 */
 
-function lotsOfArt(/*Your Code Here*/) {
-  /*Your Code Here*/
+function lotsOfArt(artistArray) {
+  let newArray = [];
+
+  for (let index = 0; index < artistArray.length; index++) {
+    if (artistArray[index].paintings > 100) {
+      newArray.push(artistArray[index].name)
+    }
+  }
+
+  return newArray
 }
 
 
@@ -311,8 +346,12 @@ Use artistInfo to do the following:
   "Frida Kahlo de Rivera (Spanish pronunciation: [ˈfɾiða ˈkalo]; born Magdalena Carmen Frida Kahlo y Calderón; 6 July 1907 – 13 July 1954) was a Mexican artist who painted many portraits, self-portraits and works inspired by the nature and artifacts of Mexico. Inspired by the country's popular culture, she employed a naïve folk art style to explore questions of identity, postcolonialism, gender, class and race in Mexican society. Her paintings often had strong autobiographical elements and mixed realism with fantasy. In addition to belonging to the post-revolutionary Mexicayotl movement, which sought to define a Mexican identity, Kahlo has been described as a surrealist or magical realist.Born to a German father and a mestiza mother, Kahlo spent most of her childhood and adult life at her family home in Coyoacán, La Casa Azul, now known and publicly accessible as the Frida Kahlo Museum. She was disabled by polio as a child. Until a traffic accident at age eighteen caused lifelong pain and medical problems, she had been a promising student headed for medical school. During her recovery, she returned to her childhood hobby of art with the idea of becoming an artist."
 */
 
-function artistInfo(/*Your Code Here*/){
-  /*Your Code Here*/
+function artistInfo(artistArray, name) {
+  for (let index = 0; index < artistArray.length; index++) {
+    if (artistArray[index].name === name) {
+      return artistArray[index].bio
+    }
+  }
 }
 
 
@@ -327,8 +366,20 @@ Use artistByCountry to do the following:
 🌟 EXAMPLE: Invoking artistByCountry(artists, 'Spanish') will return: [ 'Salvador Dali', 'Pablo Picasso', 'Francisco Goya']
 */
 
-function artistByCountry(/*Your Code Here*/){
-  /*Your Code Here*/
+function artistByCountry(artistArray, nationality) {
+  let newArray = [];
+
+  for (let index = 0; index < artistArray.length; index++) {
+    if (artistArray[index].nationality === nationality) {
+      if (artistArray[index].nationality.split(',').length === 1) {
+        newArray.push(artistArray[index].name)
+      }
+
+      console.log('split', artistArray[index].nationality.split(','))
+    }
+  }
+
+  return newArray
 }
 
 
